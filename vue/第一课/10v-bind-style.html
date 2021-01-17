@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-bind-style</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        body{
+            margin: 0px;
+        }
+        #app{
+            width: 100vw;height: 100vh;
+            background: rgba(0, 0, 0, 1);
+            /* color: #fff; */
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        stylet用于弥补class的不足
+        v-bind:style="string",
+        v-bind:style=arr,
+        v-bind:style="{
+            key css样式名称
+            value css样式值(值可以是变量)
+            key：value
+        }",
+     -->
+    <div id="app" v-bind:style="[
+        {
+            background:'rgba(0,0,0,'+num/100+')'
+        },
+        other,
+        {
+            margin:'100px'
+        }
+    ]">
+
+        <input type="range" v-model="num">
+        <p>{{num}}</p>
+    </div>
+
+    <script>
+        const app = new Vue({
+            el:"#app",
+            data:{
+                num:"1",
+                other:{
+                    color:"red"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

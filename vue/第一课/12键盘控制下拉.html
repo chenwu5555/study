@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>键盘控制下拉</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .list{
+            width: 300px;
+        }
+        .list .item.active{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="list">
+            <input type="text"
+                 v-on:keydown.up="up()"
+                 v-on:keydown.down="down()" 
+                 v-on:keydown.enter="enter()"
+                 v-model="concent"
+            >
+            <div
+                 v-for="(item,index) in list"
+                 v-bind:class="{
+                    item:true,
+                     active:selectIndex === index
+                 }"
+                  
+            >
+                {{item}}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const app =new Vue({
+            el:"#app",
+            data:{
+                selectIndex:0,
+                list:[
+                    "香蕉","苹果","猕猴桃"
+                ],
+                concent:"",
+            },
+            methods:{
+                up(){
+                    if( this.selectIndex <=0) return
+                    this.selectIndex--
+                },
+                down(){
+                    if( this.selectIndex >=this.list.length-1) return
+                    this.selectIndex++
+                },
+                enter(){
+                   
+                }
+            }
+        })
+    </script>
+</body>
+</html>

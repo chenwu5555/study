@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>get和set</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+</head>
+<body>
+    <h1 id="title"></h1>
+    <script>
+        let _title = ""
+        const app = {
+            // 拦截访问title成员
+            get title(){
+                return _title
+            },
+            // 拦截给title成员赋值
+            set title(value){
+                document.getElementById("tltie").innerHTML = value;
+                // console.log("正在给title赋值",value)
+             _title = value;
+            }
+        };
+    </script>
+</body>
+</html>

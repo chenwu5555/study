@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue的使用方法</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+
+    <script>
+        // 1.el 选项 用于把实例生成的标签添加到羽绒棉的元素中。
+        // 2.data选项 给vue的模板，也就是template选项里的内容提供数据的。
+        // 3.template选项 给实例提供模板
+        // 模板可以直接写到实例挂载的元素里，也可以在template选项里直接写标签，但是template选项里只能有一个根元素
+        // 如果使用了template选项中的，那么就会替换html上面的挂挂载元素。
+        const app =new Vue({
+            el:"#app",
+            data:{
+                title:"vue的使用方法",
+                arr:[1,2,3],
+            },
+            // 提供模板处理函数
+            methods:{
+                run(){
+                    return  250;
+                }
+            },
+            template:
+            `
+            <div>
+                <h1>{{title}}</h1>
+                <p>{{arr}}</p>
+                <div>{{run()}}</div>
+            </div>
+            `
+        })
+    </script>
+</body>
+</html>

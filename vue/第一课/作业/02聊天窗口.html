@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聊天窗口</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+    #window{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 500px;height: 500px;
+        margin: 100px auto;
+        border: 1px solid #000;
+    }
+    #list{
+        width: inherit;
+        flex:1;
+        border-bottom: 1px solid #000;
+        overflow: auto;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    #list .item{
+        display: flex;
+        align-content: center;
+    }
+    #list .self{
+        justify-content: flex-end;
+    }
+    #list .item span{
+        padding: 5px 10px;
+        border: 1px solid #000;
+        border-radius: 10px;
+    }
+    #window textarea{
+        height: 150px;
+        margin: 0;padding: 0;
+        border: none;
+        border-top: 1px solid #000;
+    }
+    #window .but-group{
+        position: absolute;
+        right: 20px;bottom: 20px;
+    }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="window">
+            <div id="list">
+                <div v-for="item in list" v-bind:class="'item' + ((id === item.id) ?  ' self':'')">
+                  <div>
+                      <b>{{item.nickname}}</b><span>{{item.value}}</span>
+                  </div>
+                </div>
+            </div>
+            <textarea v-model="text" v-on:keydown.enter="keydown"></textarea>
+            <div class="but-group">
+                <button v-on:click="send"> 发送</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const app = new Vue({
+            el:"#app",
+            data:{
+                id:"1",
+                text:'',
+                list:[
+                    {
+                        id:"1",
+                        nickname:"小明",
+                        value:"文本内容"
+                    },
+                    {
+                        id:"2",
+                        nickname:"小李",
+                        value:"文本内容"
+                    }
+                ]
+            },
+            methods:{
+                send(){
+                    this.list.push({
+                        id:"1",
+                        nickname:"小明",
+                        value:this.text
+                    });
+                    // 清空输入框
+                    this.text = ''
+                    setTimeout(()=>{
+                        this.list.push({
+                            id:"2",
+                            nickname:"小李"+Math.ceil(Math.random()*100),
+                            value:"大哥"
+                        })
+                    },300)
+                },
+                keydown(){
+                    this.list.push({
+                        id:"1",
+                        nickname:"小明",
+                        value:this.text
+                    });
+                    // 清空输入框
+                    this.text = ''
+                    setTimeout(()=>{
+                        this.list.push({
+                            id:"2",
+                            nickname:"小李"+Math.ceil(Math.random()*100),
+                            value:"大哥"
+                        })
+                    },300)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

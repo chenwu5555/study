@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件修饰符</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .box{
+            width: 500px;height: 500px;
+            background: red;
+        }
+        .child{
+            width: 250px;height: 250px;
+            background: yellow;
+        }
+        .mousedown{
+            width: 250px;height: 250px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        .stop:等同于js中的event.stopPropagation(),阻止事件冒泡。
+
+        .prevent:等同于js中的event.PreventDefault(),为了防止事件的默认行为，
+        例如：右键出发菜单，屏蔽掉，文本域回车换行，也可以阻止掉.
+        
+        .capture:事件在捕获的时候就在运行，与冒泡事件相反
+
+        .self；只会触发自身的事件，不含子元素，与冒泡事件无关
+
+        .once:只会触发一次，就会解绑
+
+        .passive  移动端事件优化的修饰符
+     -->
+    <div id="app">
+        <div class="box" v-on:click.self="click('index')">
+        <!-- <div class="box" v-on:click.capture="click('index')"> -->
+            <!-- <div class="child" v-on:click.stop="click('child',$event)"></div> -->
+            <div class="child" v-on:click.once="click('child',$event)"></div>
+        </div>
+        <!-- 鼠标按钮修饰符事件 .left  .right  .middle -->
+        <div class="mousedown" style="background: green;" v-on:mousedown.left="mousedown('left')" v-on:mousedown.right="mousedown('right')"></div>
+        <textarea v-on:keydown.prevent="prevent('keydown')"></textarea>
+        
+        <!-- 键盘上的键盘码修饰符，可以使用键盘码，也可以使用键盘名称 -->
+        <!-- <textarea v-on:keydown.enter="keydown"></textarea> -->
+        <!-- <textarea v-on:keydown.13="keydown"></textarea> -->
+        <textarea v-on:keydown.w="keydown('w')" v-on:keydown.s="keydown('s')"></textarea>
+
+        <!-- keydown.ctrl.shift.q(ctrl和shift都是系统修饰按键)必须同时按下才可以 -->
+        <textarea v-on:keydown.ctrl.alt.q="keydown('jietu')"></textarea>
+
+        <!-- v-on:keydown.ctrl="keydown('parent')",按住ctrl按键和其他的按键时，也会触发该事件-->
+        <textarea v-on:keydown.ctrl="keydown('parent')"></textarea>
+
+        <!--  exact 只会按照设置的按键来触发，按了多余的没得用-->
+        <textarea v-on:keydown.alt.ctrl.exact="keydown('alt')"></textarea>
+    </div>
+
+    <script>
+
+        const app = new Vue({
+            el:"#app",
+            data:{
+
+            },
+            methods:{
+                // 阻止事件冒泡
+                // click(v, e){
+                //     e.stopPropagation()
+                //    console.log(v)
+                // }
+                click(v,e){
+                    console.log(v)
+                },
+                prevent(v){
+                    console.log(v)
+                    // 阻止了事件的发生
+                },
+
+                // keydown(event){
+                //     alert("按下了回车键")
+                // },
+
+                keydown(v){
+                    alert(v)
+                },
+                keydown(jietu){
+                    alert("截图成功")
+                },
+                keydown(parent){
+                    alert("ctrl按键")
+                },
+                keydown(alt){
+                    alert("alt按键")
+                },
+                mousedown(left){
+                    console.log(left)
+                },
+                mousedown(right){
+                    console.log(right)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

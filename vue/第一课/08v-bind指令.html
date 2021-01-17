@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-bind指令</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- v-bind给标签的某一个属性绑定一个变量 -->
+        <!-- <div v-bind:style="css"></div>
+        <div v-bind:style="index">222</div> -->
+
+        <div v-text="text">222</div>
+
+        <!-- 不需要转译，直接加入html -->
+        <div v-html="html"></div>
+    </div>
+
+    </script>
+    <script>
+        const app = new Vue({
+            el:"#app",
+            data:{
+                css:{
+                    width:"200px",
+                    height:"200px",
+                    background:"yellow",
+                },
+                index:{
+                    width:"100px",
+                    height:"100px",
+                    background:"red",
+                },
+                text:"蜡笔小新",
+                html:"<h1>野原新之助</h1>"
+            }
+        })
+    </script>
+</body>
+</html>

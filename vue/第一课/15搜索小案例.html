@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索小案例</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="searce">
+        <div class="list">
+            <div class="item" v-for="item in mail" v-on:click="select(item)">
+                {{item}}
+            </div>
+        </div>
+        
+    </div>
+    <script>
+        const app =new Vue({
+            el:"#app",
+            data:{
+                searce:"",
+
+            },
+            computed:{
+                mail(){
+                    if(!this.searce) return []
+                    // 如果输入框里面有@符号或者本身就是一个邮箱地址，就返回一个空数组
+                    if(/^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g.test(this.searce)){
+                        return []
+                    }
+                    return [
+                        this.searce+"@qq.com",
+                        this.searce+"@163.com"
+                    ]
+                }
+            },
+            methods:{
+                select(item){
+                    // console.log(item)
+                    this.searce = item
+                }
+            }
+        })
+    </script>
+</body>
+</html>

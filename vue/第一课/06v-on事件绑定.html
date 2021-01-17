@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>06v-on事件绑定</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- v-on绑定事件js里的所有事件
+        v-on:js事件名称
+        click = onclick
+        mousemove.....
+
+        $event 全局变量 用于传递事件
+        -->
+        <div>
+            <ul>
+                <li v-for="(value,index) in list">
+                    <!-- 当事件使用了自定义传参时，如果需要事件对象时，可以通过使用$event来传递 -->
+                    {{value}}  <button v-on:click="remove(index,$event)">删除</button></li>
+                
+            </ul>
+        </div>
+        <div>
+            <input type="text" v-model="user">
+            <button v-on:click="click(1,$event)">添加用户</button>
+        </div>
+    </div>
+
+    <script>
+        const app = new Vue({
+            el:"#app",
+            data:{
+                list:[
+                    "张三",
+                    "李四",
+                    "王五",
+                ],
+                user:"",
+            },
+            methods:{
+                click(n,e){
+                    // alert("添加用户")
+                    if(this.user){
+                        this.list.push(this.user)
+                        // 清空变量
+                        this.user = ""
+                    }
+                },
+                remove(index){
+                    // alert("删除"+index)
+                    this.list.splice(index,1)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

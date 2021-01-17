@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单绑定修饰符</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        .lazy:当我们希望输完东西之后，光标离开时才更新视图，也就是相当于onchange事件触发时才更新
+     -->
+    <div id="app">
+        <input type="text" v-model.lazy="value">
+        <p>{{value}}</p>
+        <div class="box">
+            <!-- 
+                .trim: 过滤掉输入框首尾的空格，中间是不会过滤掉的
+                -->     
+            <input type="text" v-model.trim="trim">
+            <p>{{trim}}</p>
+        </div>
+        <div>
+            <!-- 
+                .number 限制输入数字
+             -->
+            <input type="number" v-model.number="num">
+            <p>{{num}}</p>
+        </div>
+    </div>
+
+    <script>
+        const app = new Vue({
+            el:"#app",
+            data:{
+                value:"",
+                trim:"",
+                num:"",
+            }
+        })
+    </script>
+</body>
+</html>

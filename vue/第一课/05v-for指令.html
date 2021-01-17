@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-for指令</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- <ul>
+            <div>
+                <li v-for="(value,key) in list">{{key}}{{value}}</li>
+            </div>
+        </ul> -->
+        <ul>
+            <div>
+                <li v-for="value in users">
+                    <b>老师:{{value.name}}</b>
+                    <b>班级:{{value.id}}</b>
+                    <b>姓名:{{value.students.name}}</b>
+                    <b>年龄:{{value.students.age}}</b>
+                    <!-- <b v-for="(value,key) in value">
+                        {{key === "name"? "老师" : "班级"}}:{{value}}
+                    </b> -->
+                </li>
+            </div>
+        </ul>
+        <div>
+            <span v-for="(v,index) in 10">[{{index}}]{{v}}</span>
+            <b v-for="(value,key) in user">{{key}}{{value}}</b>
+        </div>
+    </div>
+
+    <script>
+        const app =new Vue ({
+            el:"#app",
+            data:{
+                list:[
+                    "张三",
+                    "李四",
+                    "王五"
+                ],
+                user:{
+                    name:"张三",
+                    age:23,
+                },
+                users:[
+                    {
+                        name:"张三",
+                        id:"一班",
+                        students:{
+                            name:"小明",
+                            age:18,
+                        },
+                    },
+                    {
+                        name:"李四",
+                        id:"二班",
+                        students:{
+                            name:"小李",
+                            age:19,
+                        }
+                    },
+                    {
+                        name:"王五",
+                        id:"三班",
+                        students:{
+                            name:"小红",
+                            age:22,
+                        }
+                    }, {
+                        name:"赵六",
+                        id:"四班",
+                        students:{
+                            name:"小华",
+                            age:25,
+                        }
+                    },
+                ]
+            }
+        })
+    </script>
+</body>
+</html>
